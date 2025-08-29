@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RangerSwap - Multi-Chain DEX</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>🔄 RangerSwap</h1>
+            </div>
+            <nav class="header-nav">
+                <a href="bridge.html" class="nav-link">Bridge</a>
+                <a href="info.html" class="nav-link">Info</a>
+            </nav>
+            <div class="header-right">
+                <div class="chain-selector">
+                    <select id="chainSelect">
+                        <option value="369">PulseChain</option>
+                        <option value="8453">Base</option>
+                        <option value="998899">HyperEVM</option>
+                    </select>
+                </div>
+                <button id="connectWallet" class="connect-btn">Connect Wallet</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="swap-container">
+                <div class="swap-header">
+                    <div class="tabs">
+                        <button class="tab active" data-tab="swap">Swap</button>
+                        <button class="tab" data-tab="liquidity">Liquidity</button>
+                        <button class="tab" data-tab="pools">Pools</button>
+                        <button class="tab" data-tab="limit">Limit Orders</button>
+                    </div>
+                </div>
+
+                <!-- Swap Tab -->
+                <div id="swap" class="tab-content active">
+                    <!-- Fixed Slippage Settings -->
+                    <div class="slippage-settings">
+                        <div class="slippage-header">
+                            <span>Slippage Tolerance</span>
+                        </div>
+                        <div class="slippage-controls">
+                            <button class="slippage-preset" data-value="0.1">0.1%</button>
+                            <button class="slippage-preset active" data-value="0.5">0.5%</button>
+                            <button class="slippage-preset" data-value="1.0">1.0%</button>
+                            <div class="slippage-custom">
+                                <input type="number" id="slippageInput" value="0.5" min="0.1" max="50" step="0.1" placeholder="Custom">
+                                <span>%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swap-form">
+                        <div class="token-input">
+                            <div class="input-header">
+                                <span>From</span>
+                                <span class="balance" id="fromBalance">Balance: 0</span>
+                            </div>
+                            <div class="input-row">
+                                <input type="number" id="fromAmount" placeholder="0.0">
+                                <button class="token-select" id="fromToken">
+                                    <span>Select Token</span>
+                                    <span class="arrow">▼</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="swap-arrow">
+                            <button id="swapTokens">⇅</button>
+                        </div>
+
+                        <div class="token-input">
+                            <div class="input-header">
+                                <span>To</span>
+                                <span class="balance" id="toBalance">Balance: 0</span>
+                            </div>
+                            <div class="input-row">
+                                <input type="number" id="toAmount" placeholder="0.0" readonly>
+                                <button class="token-select" id="toToken">
+                                    <span>Select Token</span>
+                                    <span class="arrow">▼</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="swap-info">
+                            <div class="info-row">
+                                <span>Rate:</span>
+                                <span id="exchangeRate">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span>Fee:</span>
+                                <span id="tradingFee">0.01%</span>
+                            </div>
+                            <div class="info-row">
+                                <span>Min Received:</span>
+                                <span id="minReceived">-</span>
+                            </div>
+                        </div>
+
+                        <div class="route-info">
+                            <div class="route-header">
+                                <span>Route:</span>
+                                <span id="routePath">Select tokens to see route</span>
+                            </div>
+                            <div class="fee-info">
+                                <small>Trading fee goes to liquidity providers. RangerSwap takes 0.01% on each trade.</small>
+                            </div>
+                        </div>
+
+                        <button id="swapButton" class="swap-btn" disabled>Connect Wallet</button>
+                    </div>
+                </div>
+
+                <!-- Rest of tabs remain the same... -->
+                <!-- Liquidity Tab -->
+                <div id="liquidity" class="tab-content">
+                    <div class="liquidity-form">
+                        <div class="token-input">
+                            <div class="input-header">
+                                <span>Token A</span>
+                                <span class="balance" id="tokenABalance">Balance: 0</span>
+                            </div>
+                            <div class="input-row">
+                                <input type="number" id="tokenAAmount" placeholder="0.0">
+                                <button class="token-select" id="tokenASelect">
+                                    <span>Select Token</span>
+                                    <span class="arrow">▼</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="plus-sign">+</div>
+
+                        <div class="token-input">
+                            <div class="input-header">
+                                <span>Token B</span>
+                                <span class="balance" id="tokenBBalance">Balance: 0</span>
+                            </div>
+                            <div class="input-row">
+                                <input type="number" id="tokenBAmount" placeholder="0.0">
+                                <button class="token-select" id="tokenBSelect">
+                                    <span>Select Token</span>
+                                    <span class="arrow">▼</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="liquidity-info">
+                            <div class="info-row">
+                                <span>Pool Share:</span>
+                                <span id="poolShare">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span>LP Tokens:</span>
+                                <span id="lpTokens">-</span>
+                            </div>
+                        </div>
+
+                        <div class="route-info">
+                            <div class="liquidity-description">
+                                <small>Add liquidity to earn 0.3% trading fees. Your tokens will be added to the liquidity pool and you'll receive LP tokens representing your share.</small>
+                            </div>
+                        </div>
+
+                        <button id="addLiquidityButton" class="swap-btn" disabled>Add Liquidity</button>
+                    </div>
+                </div>
+
+                <!-- Pools Tab -->
+                <div id="pools" class="tab-content">
+                    <div class="pools-container">
+                        <div class="pools-header">
+                            <h3>Your Liquidity Positions</h3>
+                        </div>
+                        <div id="userPositions" class="positions-list">
+                            <div class="no-positions">
+                                <p>No liquidity positions found. Add liquidity to start earning fees.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Limit Orders Tab -->
+                <div id="limit" class="tab-content">
+                    <div class="limit-form">
+                        <div class="limit-type-selector">
+                            <button class="limit-type active" data-type="buy">Buy</button>
+                            <button class="limit-type" data-type="sell">Sell</button>
+                        </div>
+
+                        <div class="token-input">
+                            <div class="input-header">
+                                <span id="limitFromLabel">Pay</span>
+                                <span class="balance" id="limitFromBalance">Balance: 0</span>
+                            </div>
+                            <div class="input-row">
+                                <input type="number" id="limitFromAmount" placeholder="0.0">
+                                <button class="token-select" id="limitFromToken">
+                                    <span>Select Token</span>
+                                    <span class="arrow">▼</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="token-input">
+                            <div class="input-header">
+                                <span>Price</span>
+                                <span class="current-price" id="currentPrice">Current: -</span>
+                            </div>
+                            <div class="input-row">
+                                <input type="number" id="limitPrice" placeholder="0.0">
+                                <span class="price-unit" id="priceUnit">per token</span>
+                            </div>
+                        </div>
+
+                        <div class="token-input">
+                            <div class="input-header">
+                                <span id="limitToLabel">Receive</span>
+                                <span class="balance" id="limitToBalance">Balance: 0</span>
+                            </div>
+                            <div class="input-row">
+                                <input type="number" id="limitToAmount" placeholder="0.0" readonly>
+                                <button class="token-select" id="limitToToken">
+                                    <span>Select Token</span>
+                                    <span class="arrow">▼</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="route-info">
+                            <div class="limit-description">
+                                <small>Limit orders will be executed when the market price reaches your target price. Orders may be partially filled.</small>
+                            </div>
+                        </div>
+
+                        <button id="limitOrderButton" class="swap-btn" disabled>Create Limit Order</button>
+                    </div>
+
+                    <div class="orders-container">
+                        <div class="orders-header">
+                            <h3>Your Orders</h3>
+                        </div>
+                        <div id="userOrders" class="orders-list">
+                            <div class="no-orders">
+                                <p>No limit orders found.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Token Selection Modal -->
+    <div id="tokenModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Select Token</h3>
+                <button class="close">&times;</button>
+            </div>
+            <div class="token-search">
+                <input type="text" id="tokenSearch" placeholder="Search token name or address">
+            </div>
+            <div class="token-list" id="tokenList"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
