@@ -110,7 +110,8 @@ const debouncedCalculateSwapAmount = debounce(calculateSwapAmount, 350);
 
 function initializeApp() {
     if (typeof window.ethereum === 'undefined') {
-        alert('Please install MetaMask to use RangerSwap');
+        // No wallet: say so once, without blocking the page
+        notify('No wallet found. Install MetaMask or another EVM wallet to swap.', 'info');
         return;
     }
     
@@ -270,7 +271,7 @@ function copyToClipboard(elementId) {
             btn.style.background = 'linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%)';
         }, 1000);
     }).catch(() => {
-        alert('Failed to copy to clipboard');
+        notify('Failed to copy to clipboard', 'error');
     });
 }
 
@@ -294,7 +295,7 @@ async function connectWallet() {
         
     } catch (error) {
         console.error('Error connecting wallet:', error);
-        alert('Failed to connect wallet');
+        notify('Failed to connect wallet', 'error');
     }
 }
 
@@ -733,7 +734,7 @@ async function fetchAggregatorQuote(source, fromAmountStr) {
 
 async function executeSwap() {
     if (!currentAccount || !fromToken || !toToken) {
-        alert('Please connect wallet and select tokens');
+        notify('Please connect wallet and select tokens');
         return;
     }
 
@@ -742,7 +743,7 @@ async function executeSwap() {
     const slippage = parseFloat(document.getElementById('slippageInput').value) || 0.5;
 
     if (!fromAmount || !toAmount) {
-        alert('Please enter an amount');
+        notify('Please enter an amount');
         return;
     }
 
@@ -760,7 +761,7 @@ async function executeSwap() {
             tx = await executeOwnRouterSwap(chain, fromAmount, toAmount, slippage);
         }
 
-        alert('Swap submitted! Transaction hash: ' + tx.hash);
+        notify('Swap submitted. Transaction hash: ' + tx.hash, 'success');
 
         document.getElementById('fromAmount').value = '';
         document.getElementById('toAmount').value = '';
@@ -772,7 +773,7 @@ async function executeSwap() {
 
     } catch (error) {
         console.error('Error executing swap:', error);
-        alert('Swap failed: ' + (error.reason || error.message));
+        notify('Swap failed: ' + (error.reason || error.message), 'error');
     }
 }
 
@@ -873,10 +874,10 @@ async function approveToken(tokenAddress, spenderAddress, amount) {
 async function addLiquidity() {
     const source = getLiquiditySource();
     if (source.type !== 'own') {
-        alert(`Liquidity on ${CHAINS[currentChainId].name} is provided by ${source.label}, not by RangerSwap's own pools. Trades are routed through their existing liquidity, so there's nothing to add here yet.`);
+        notify(`Liquidity on ${CHAINS[currentChainId].name} is provided by ${source.label}, not by RangerSwap's own pools. Trades are routed through their existing liquidity, so there's nothing to add here yet.`);
         return;
     }
-    alert('Add liquidity functionality will be implemented with deployed contracts');
+    notify('Add liquidity functionality will be implemented with deployed contracts');
 }
 
 function setLimitOrderType(type) {
@@ -903,7 +904,7 @@ function calculateLimitAmount() {
 }
 
 async function createLimitOrder() {
-    alert('Limit orders require additional smart contracts to be deployed');
+    notify('Limit orders require additional smart contracts to be deployed');
 }
 
 function updateBridgeChains() {
@@ -912,7 +913,7 @@ function updateBridgeChains() {
     
     // Prevent same chain selection
     if (fromChain === toChain) {
-        alert('Please select different chains for bridging');
+        notify('Please select different chains for bridging');
         return;
     }
     
@@ -933,7 +934,7 @@ function calculateBridgeAmount() {
 }
 
 async function executeBridge() {
-    alert('Bridge functionality requires cross-chain infrastructure to be deployed');
+    notify('Bridge functionality requires cross-chain infrastructure to be deployed');
 }
 
 async function loadUserPositions() {
@@ -1002,3 +1003,21 @@ function filterTokens() {
 
 // Make copyToClipboard globally accessible
 window.copyToClipboard = copyToClipboard;
+
+// Non-blocking message in place of alert(). type: 'info' | 'success' | 'error'
+function notify(message, type = 'info') {
+    let region = document.getElementById('toastRegion');
+    if (!region) {
+        region = document.createElement('div');
+        region.id = 'toastRegion';
+        region.className = 'toast-region';
+        region.setAttribute('role', 'status');
+        region.setAttribute('aria-live', 'polite');
+        document.body.appendChild(region);
+    }
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+    region.appendChild(toast);
+    setTimeout(() => toast.remove(), type === 'error' ? 9000 : 6000);
+}

@@ -11,8 +11,8 @@ Configured chains: Ethereum, Base, PulseChain, HyperEVM and Robinhood Chain.
 | File | Purpose |
 |---|---|
 | `index.html` | Swap interface |
-| `bridge.html` | Bridge page |
-| `info.html` | Docs, FAQ and contract links |
+| `bridge.html` | Links to third-party bridges for the supported chains |
+| `info.html` | Project status, routing, fees and links to the contract source |
 | `admin.html`, `admin.js` | Token manager: add or edit chains and tokens in the browser, then export a new `tokens-data.js` |
 | `tokens-data.js` | Chain list, RPC endpoints, token lists, fee settings and liquidity source per chain |
 | `script.js` | Wallet connection, quoting and swap logic |
@@ -48,4 +48,4 @@ Edit the top of `tokens-data.js`, or use `admin.html` and export:
 
 ## Status
 
-Work in progress. The fee recipient and 0x key are placeholders, and RangerSwap's own pools have no liquidity yet, so chains should use the `external-router` or `aggregator` modes.
+Work in progress. Swaps work; the liquidity, pools and limit order tabs are interface only until the contracts are deployed. Token and bridge logo images are not in the repo, so tokens show their built-in fallback icons. The fee recipient and 0x key are placeholders, and RangerSwap's own pools have no liquidity yet, so chains should use the `external-router` or `aggregator` modes.

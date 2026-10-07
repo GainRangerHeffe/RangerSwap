@@ -3,8 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RangerSwap - Multi-Chain DEX</title>
+    <title>RangerSwap | Multi-Chain DEX Front End</title>
+    <meta name="description" content="RangerSwap is a multi-chain DEX front end for PulseChain, Base, HyperEVM and Robinhood Chain. Swap through existing liquidity with a small, transparent fee.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="RangerSwap">
+    <meta property="og:title" content="RangerSwap | Multi-Chain DEX Front End">
+    <meta property="og:description" content="RangerSwap is a multi-chain DEX front end for PulseChain, Base, HyperEVM and Robinhood Chain. Swap through existing liquidity with a small, transparent fee.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="RangerSwap | Multi-Chain DEX Front End">
+    <meta name="twitter:description" content="RangerSwap is a multi-chain DEX front end for PulseChain, Base, HyperEVM and Robinhood Chain. Swap through existing liquidity with a small, transparent fee.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0a'/%3E%3Crect x='3' y='3' width='58' height='58' fill='none' stroke='%2300ffff' stroke-width='4'/%3E%3Ctext x='32' y='46' font-family='Arial,sans-serif' font-size='40' font-weight='900' text-anchor='middle' fill='%2300ffff'%3ER%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "RangerSwap",
+        "description": "RangerSwap is a multi-chain DEX front end for PulseChain, Base, HyperEVM and Robinhood Chain. Swap through existing liquidity with a small, transparent fee.",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any (web browser with an EVM wallet)",
+        "codeRepository": "https://github.com/GainRangerHeffe/RangerSwap",
+        "featureList": [
+            "Token swaps on PulseChain, Base, HyperEVM and Robinhood Chain",
+            "Routing through existing DEX liquidity or the 0x aggregator",
+            "Configurable swap fee, 0.25% by default"
+        ]
+    }
+    </script>
 </head>
 <body>
     <header class="header">
@@ -12,20 +41,21 @@
             <div class="logo">
                 <h1>🔄 RangerSwap</h1>
             </div>
-            <nav class="header-nav">
+            <nav class="header-nav" aria-label="Main">
+                <a href="index.html" class="nav-link active" aria-current="page">Swap</a>
                 <a href="bridge.html" class="nav-link">Bridge</a>
                 <a href="info.html" class="nav-link">Info</a>
             </nav>
             <div class="header-right">
                 <div class="chain-selector">
-                    <select id="chainSelect">
+                    <select id="chainSelect" aria-label="Network">
                         <option value="369">PulseChain</option>
                         <option value="8453">Base</option>
                         <option value="998899">HyperEVM</option>
                         <option value="4663">Robinhood Chain</option>
                     </select>
                 </div>
-                <button id="connectWallet" class="connect-btn">Connect Wallet</button>
+                <button id="connectWallet" class="connect-btn" type="button">Connect Wallet</button>
             </div>
         </div>
     </header>
@@ -36,9 +66,9 @@
                 <div class="swap-header">
                     <div class="tabs">
                         <button class="tab active" data-tab="swap">Swap</button>
-                        <button class="tab" data-tab="liquidity">Liquidity</button>
+                        <button class="tab" data-tab="liquidity">Liquidity <span class="soon-badge">Soon</span></button>
                         <button class="tab" data-tab="pools">Pools</button>
-                        <button class="tab" data-tab="limit">Limit Orders</button>
+                        <button class="tab" data-tab="limit">Limit Orders <span class="soon-badge">Soon</span></button>
                         <button class="tab" data-tab="v3pools">V3 Pools <span class="soon-badge">Soon</span></button>
                     </div>
                 </div>
@@ -55,7 +85,7 @@
                             <button class="slippage-preset active" data-value="0.5">0.5%</button>
                             <button class="slippage-preset" data-value="1.0">1.0%</button>
                             <div class="slippage-custom">
-                                <input type="number" id="slippageInput" value="0.5" min="0.1" max="50" step="0.1" placeholder="Custom">
+                                <input type="number" id="slippageInput" aria-label="Custom slippage, percent" value="0.5" min="0.1" max="50" step="0.1" placeholder="Custom">
                                 <span>%</span>
                             </div>
                         </div>
@@ -68,7 +98,7 @@
                                 <span class="balance" id="fromBalance">Balance: 0</span>
                             </div>
                             <div class="input-row">
-                                <input type="number" id="fromAmount" placeholder="0.0">
+                                <input type="number" id="fromAmount" aria-label="Amount to swap" placeholder="0.0">
                                 <button class="token-select" id="fromToken">
                                     <span>Select Token</span>
                                     <span class="arrow">▼</span>
@@ -77,7 +107,7 @@
                         </div>
 
                         <div class="swap-arrow">
-                            <button id="swapTokens">⇅</button>
+                            <button id="swapTokens" type="button" aria-label="Switch the two tokens">⇅</button>
                         </div>
 
                         <div class="token-input">
@@ -86,7 +116,7 @@
                                 <span class="balance" id="toBalance">Balance: 0</span>
                             </div>
                             <div class="input-row">
-                                <input type="number" id="toAmount" placeholder="0.0" readonly>
+                                <input type="number" id="toAmount" aria-label="Amount you receive" placeholder="0.0" readonly>
                                 <button class="token-select" id="toToken">
                                     <span>Select Token</span>
                                     <span class="arrow">▼</span>
@@ -101,7 +131,7 @@
                             </div>
                             <div class="info-row">
                                 <span>Fee:</span>
-                                <span id="tradingFee">0.01%</span>
+                                <span id="tradingFee">0.25%</span>
                             </div>
                             <div class="info-row">
                                 <span>Min Received:</span>
@@ -115,7 +145,7 @@
                                 <span id="routePath">Select tokens to see route</span>
                             </div>
                             <div class="fee-info">
-                                <small>Trading fee goes to liquidity providers. RangerSwap takes 0.01% on each trade.</small>
+                                <small>RangerSwap adds a 0.25% fee on top of the price from the liquidity source.</small>
                             </div>
                         </div>
 
@@ -133,7 +163,7 @@
                                 <span class="balance" id="tokenABalance">Balance: 0</span>
                             </div>
                             <div class="input-row">
-                                <input type="number" id="tokenAAmount" placeholder="0.0">
+                                <input type="number" id="tokenAAmount" aria-label="Token A amount" placeholder="0.0">
                                 <button class="token-select" id="tokenASelect">
                                     <span>Select Token</span>
                                     <span class="arrow">▼</span>
@@ -149,7 +179,7 @@
                                 <span class="balance" id="tokenBBalance">Balance: 0</span>
                             </div>
                             <div class="input-row">
-                                <input type="number" id="tokenBAmount" placeholder="0.0">
+                                <input type="number" id="tokenBAmount" aria-label="Token B amount" placeholder="0.0">
                                 <button class="token-select" id="tokenBSelect">
                                     <span>Select Token</span>
                                     <span class="arrow">▼</span>
@@ -170,7 +200,7 @@
 
                         <div class="route-info">
                             <div class="liquidity-description">
-                                <small>Add liquidity to earn 0.3% trading fees. Your tokens will be added to the liquidity pool and you'll receive LP tokens representing your share.</small>
+                                <small>Not available yet. RangerSwap's own pools are not deployed, so swaps use existing liquidity on each chain.</small>
                             </div>
                         </div>
 
@@ -206,7 +236,7 @@
                                 <span class="balance" id="limitFromBalance">Balance: 0</span>
                             </div>
                             <div class="input-row">
-                                <input type="number" id="limitFromAmount" placeholder="0.0">
+                                <input type="number" id="limitFromAmount" aria-label="Amount to pay" placeholder="0.0">
                                 <button class="token-select" id="limitFromToken">
                                     <span>Select Token</span>
                                     <span class="arrow">▼</span>
@@ -220,7 +250,7 @@
                                 <span class="current-price" id="currentPrice">Current: -</span>
                             </div>
                             <div class="input-row">
-                                <input type="number" id="limitPrice" placeholder="0.0">
+                                <input type="number" id="limitPrice" aria-label="Limit price" placeholder="0.0">
                                 <span class="price-unit" id="priceUnit">per token</span>
                             </div>
                         </div>
@@ -231,7 +261,7 @@
                                 <span class="balance" id="limitToBalance">Balance: 0</span>
                             </div>
                             <div class="input-row">
-                                <input type="number" id="limitToAmount" placeholder="0.0" readonly>
+                                <input type="number" id="limitToAmount" aria-label="Amount to receive" placeholder="0.0" readonly>
                                 <button class="token-select" id="limitToToken">
                                     <span>Select Token</span>
                                     <span class="arrow">▼</span>
@@ -241,7 +271,7 @@
 
                         <div class="route-info">
                             <div class="limit-description">
-                                <small>Limit orders will be executed when the market price reaches your target price. Orders may be partially filled.</small>
+                                <small>Not available yet. The limit order contract is written but not deployed.</small>
                             </div>
                         </div>
 
@@ -292,10 +322,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Select Token</h3>
-                <button class="close">&times;</button>
+                <button class="close" type="button" aria-label="Close token list">&times;</button>
             </div>
             <div class="token-search">
-                <input type="text" id="tokenSearch" placeholder="Search token name or address">
+                <input type="text" id="tokenSearch" placeholder="Search token name or address" aria-label="Search tokens">
             </div>
             <div class="token-filter-row">
                 <button class="token-filter-btn active" data-category="all">All</button>

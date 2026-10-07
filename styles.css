@@ -2155,3 +2155,158 @@ body::before {
     padding: 2rem;
     color: var(--text-muted);
 }
+
+/* ------------------------------------------------------------------
+   Refresh: readability, accessibility and motion
+   ------------------------------------------------------------------ */
+
+/* Logo as a link on the sub-pages (the swap page keeps it as the h1) */
+.logo .logo-text {
+    font-family: 'Orbitron', monospace;
+    color: var(--text-primary);
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-decoration: none;
+    text-shadow:
+        0 0 10px var(--neon-blue),
+        0 0 20px var(--neon-blue),
+        0 0 30px var(--neon-blue);
+}
+
+/* The neon frame was painting over the whole card. Draw it as a real border. */
+.swap-container {
+    border: 2px solid transparent;
+    background:
+        linear-gradient(135deg, rgb(17 17 17 / .97) 0%, rgb(5 5 5 / .97) 100%) padding-box,
+        linear-gradient(45deg, var(--neon-purple), var(--neon-blue), var(--neon-orange)) border-box;
+    backdrop-filter: none;
+}
+
+.swap-container::before {
+    display: none;
+}
+
+/* Cards hold form controls and links, so they stay still */
+.swap-container,
+.info-card,
+.bridge-card {
+    animation: none;
+}
+
+.nav-link[aria-current="page"] {
+    color: var(--neon-blue);
+    border-color: var(--neon-blue);
+}
+
+:focus-visible {
+    outline: 3px solid var(--neon-blue);
+    outline-offset: 3px;
+}
+
+/* Info page */
+.info-card h2,
+.bridge-info h2,
+.warning-content h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-text,
+.info-list {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.info-list {
+    padding-left: 1.25rem;
+}
+
+.info-list li + li {
+    margin-top: .4rem;
+}
+
+.info-list strong {
+    color: var(--text-primary);
+}
+
+.info-card code {
+    padding: .1rem .35rem;
+    border: 1px solid var(--border-glow);
+    color: var(--neon-blue);
+    font-size: .95em;
+}
+
+/* Bridge page: lettered badge in place of logo images */
+.bridge-initial {
+    display: grid;
+    place-items: center;
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--neon-blue);
+    border-color: var(--neon-blue);
+}
+
+/* Toasts, used in place of alert() */
+.toast-region {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 5000;
+    display: grid;
+    gap: .6rem;
+    width: min(26rem, calc(100vw - 2rem));
+}
+
+.toast {
+    padding: .9rem 1.1rem;
+    border: 1px solid var(--neon-blue);
+    border-left-width: 5px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    box-shadow: 0 0 24px rgb(0 0 0 / .7);
+}
+
+.toast-success {
+    border-color: var(--neon-green);
+}
+
+.toast-error {
+    border-color: var(--neon-red);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Five tabs do not fit a phone: let the row scroll instead of clipping */
+@media (max-width: 768px) {
+    .tabs {
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .tab {
+        flex: 0 0 auto;
+    }
+}

@@ -3,29 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Info - RangerSwap</title>
+    <title>About RangerSwap | Status, Fees and Contracts</title>
+    <meta name="description" content="What RangerSwap is, how swaps are routed, what the fee is, which contracts exist and what is not built yet.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="RangerSwap">
+    <meta property="og:title" content="About RangerSwap | Status, Fees and Contracts">
+    <meta property="og:description" content="What RangerSwap is, how swaps are routed, what the fee is, which contracts exist and what is not built yet.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="About RangerSwap | Status, Fees and Contracts">
+    <meta name="twitter:description" content="What RangerSwap is, how swaps are routed, what the fee is, which contracts exist and what is not built yet.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0a'/%3E%3Crect x='3' y='3' width='58' height='58' fill='none' stroke='%2300ffff' stroke-width='4'/%3E%3Ctext x='32' y='46' font-family='Arial,sans-serif' font-size='40' font-weight='900' text-anchor='middle' fill='%2300ffff'%3ER%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="header">
         <div class="container">
             <div class="logo">
-                <a href="index.html"><h1>🔄 RangerSwap</h1></a>
+                <a href="index.html"><a href="index.html" class="logo-text">🔄 RangerSwap</a></a>
             </div>
-            <nav class="header-nav">
+            <nav class="header-nav" aria-label="Main">
+                <a href="index.html" class="nav-link">Swap</a>
                 <a href="bridge.html" class="nav-link">Bridge</a>
-                <a href="info.html" class="nav-link active">Info</a>
+                <a href="info.html" class="nav-link active" aria-current="page">Info</a>
             </nav>
             <div class="header-right">
                 <div class="chain-selector">
-                    <select id="chainSelect">
+                    <select id="chainSelect" aria-label="Network">
                         <option value="369">PulseChain</option>
                         <option value="8453">Base</option>
                         <option value="998899">HyperEVM</option>
                         <option value="4663">Robinhood Chain</option>
                     </select>
                 </div>
-                <button id="connectWallet" class="connect-btn">Connect Wallet</button>
+                <button id="connectWallet" class="connect-btn" type="button">Connect Wallet</button>
             </div>
         </div>
     </header>
@@ -34,318 +48,90 @@
         <div class="container">
             <div class="page-container">
                 <div class="page-header">
-                    <h1>RangerSwap Info</h1>
-                    <p>Everything you need to know about the most secure multi-chain DEX</p>
+                    <h1>About RangerSwap</h1>
+                    <p>What it is, how it routes swaps, and what is not built yet</p>
                 </div>
 
                 <div class="info-grid">
-                    <!-- Documentation Section -->
                     <div class="info-card">
-                        <div class="card-icon">📚</div>
-                        <h3>Documentation</h3>
+                        <div class="card-icon" aria-hidden="true">🧭</div>
+                        <h2>Project status</h2>
+                        <p class="info-text">RangerSwap is a working swap front end and a set of contracts that have not been deployed. It is a prototype, not a live protocol.</p>
+                        <ul class="info-list">
+                            <li><strong>Swaps:</strong> working, routed through liquidity that already exists on each chain.</li>
+                            <li><strong>Liquidity, pools and limit orders:</strong> interface only. They need RangerSwap's own contracts, which are not deployed.</li>
+                            <li><strong>V3 pools:</strong> planned.</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon" aria-hidden="true">🔀</div>
+                        <h2>How swaps are routed</h2>
+                        <p class="info-text">Each chain is set to one liquidity source in <code>tokens-data.js</code>:</p>
+                        <ul class="info-list">
+                            <li><strong>External router:</strong> an existing Uniswap V2 style DEX, such as PulseX on PulseChain.</li>
+                            <li><strong>Aggregator:</strong> the 0x Swap API, which finds the best price across many DEXs. Needs a 0x API key.</li>
+                            <li><strong>Own pools:</strong> RangerSwap's factory and router, once they are deployed and have liquidity.</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon" aria-hidden="true">💰</div>
+                        <h2>Fees</h2>
+                        <p class="info-text">RangerSwap adds a 0.25% fee on top of the price from the liquidity source. The underlying DEX or aggregator charges its own fee as well.</p>
+                        <p class="info-text">The fee and the wallet that receives it are set in <code>tokens-data.js</code>. The receiving wallet is still a placeholder.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon" aria-hidden="true">🌐</div>
+                        <h2>Networks</h2>
+                        <ul class="info-list">
+                            <li>PulseChain</li>
+                            <li>Base</li>
+                            <li>HyperEVM</li>
+                            <li>Robinhood Chain</li>
+                        </ul>
+                        <p class="info-text">Chains, RPC endpoints and token lists can be edited in the browser with the token manager.</p>
                         <div class="info-links">
-                            <a href="#" class="info-link" target="_blank">
-                                <span class="link-icon">📄</span>
-                                <span class="link-text">Whitepaper</span>
-                                <span class="link-arrow">↗</span>
-                            </a>
-                            <a href="#" class="info-link" target="_blank">
-                                <span class="link-icon">📖</span>
-                                <span class="link-text">User Guide</span>
-                                <span class="link-arrow">↗</span>
-                            </a>
-                            <a href="#" class="info-link" target="_blank">
-                                <span class="link-icon">⚙️</span>
-                                <span class="link-text">Developer Docs</span>
-                                <span class="link-arrow">↗</span>
-                            </a>
-                            <a href="#" class="info-link" target="_blank">
-                                <span class="link-icon">❓</span>
-                                <span class="link-text">FAQ</span>
-                                <span class="link-arrow">↗</span>
-                            </a>
-                            <a href="#" class="info-link" target="_blank">
-                                <span class="link-icon">🎥</span>
-                                <span class="link-text">Video Tutorials</span>
-                                <span class="link-arrow">↗</span>
+                            <a href="admin.html" class="info-link">
+                                <span class="link-text">Open the token manager</span>
+                                <span class="link-arrow" aria-hidden="true">↗</span>
                             </a>
                         </div>
                     </div>
-
-                    <!-- Smart Contracts Section -->
                     <div class="info-card">
-                        <div class="card-icon">🔗</div>
-                        <h3>Smart Contracts</h3>
-                        <div class="contract-section">
-                            <h4>PulseChain</h4>
-                            <div class="contract-list">
-                                <div class="contract-item">
-                                    <div class="contract-info">
-                                        <span class="contract-name">Factory</span>
-                                        <span class="contract-address" id="factoryPulse">0x...</span>
-                                    </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('factoryPulse')">📋</button>
-                                </div>
-                                <div class="contract-item">
-                                    <div class="contract-info">
-                                        <span class="contract-name">Router</span>
-                                        <span class="contract-address" id="routerPulse">0x...</span>
-                                    </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('routerPulse')">📋</button>
-                                </div>
-                                <div class="contract-item">
-                                    <div class="contract-info">
-                                        <span class="contract-name">Limit Orders</span>
-                                        <span class="contract-address" id="limitPulse">0x...</span>
-                                    </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('limitPulse')">📋</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contract-section">
-                            <h4>Base</h4>
-                            <div class="contract-list">
-                                <div class="contract-item">
-                                    <div class="contract-info">
-                                        <span class="contract-name">Factory</span>
-                                        <span class="contract-address" id="factoryBase">0x...</span>
-                                    </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('factoryBase')">📋</button>
-                                </div>
-                                <div class="contract-item">
-                                    <div class="contract-info">
-                                        <span class="contract-name">Router</span>
-                                        <span class="contract-address" id="routerBase">0x...</span>
-                                    </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('routerBase')">📋</button>
-                                </div>
-                                <div class="contract-item">
-                                    <div class="contract-info">
-                                        <span class="contract-name">Limit Orders</span>
-                                        <span class="contract-address" id="limitBase">0x...</span>
-                                    </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('limitBase')">📋</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contract-section">
-                            <h4>Robinhood Chain</h4>
-                            <div class="contract-list">
-                                <div class="contract-item">
-                                    <div class="contract-info">
-                                        <span class="contract-name">Factory</span>
-                                        <span class="contract-address" id="factoryRobinhood">0x...</span>
-                                    </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('factoryRobinhood')">📋</button>
-                                </div>
-                                <div class="contract-item">
-                                    <div class="contract-info">
-                                        <span class="contract-name">Router</span>
-                                        <span class="contract-address" id="routerRobinhood">0x...</span>
-                                    </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('routerRobinhood')">📋</button>
-                                </div>
-                                <div class="contract-item">
-                                    <div class="contract-info">
-                                        <span class="contract-name">Limit Orders</span>
-                                        <span class="contract-address" id="limitRobinhood">0x...</span>
-                                    </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('limitRobinhood')">📋</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Community Section -->
-                    <div class="info-card">
-                        <div class="card-icon">🌐</div>
-                        <h3>Community</h3>
+                        <div class="card-icon" aria-hidden="true">🔗</div>
+                        <h2>Smart contracts</h2>
+                        <p class="info-text">Source is in the repository. None of these are deployed or audited.</p>
                         <div class="info-links">
-                            <a href="https://twitter.com/rangerswap" class="info-link" target="_blank">
-                                <span class="link-icon">🐦</span>
-                                <span class="link-text">Twitter/X</span>
-                                <span class="link-arrow">↗</span>
+                            <a href="https://github.com/GainRangerHeffe/RangerSwap/blob/main/factory.sol" class="info-link" target="_blank" rel="noopener">
+                                <span class="link-text">RangerSwapFactory</span>
+                                <span class="link-arrow" aria-hidden="true">↗</span>
                             </a>
-                            <a href="https://discord.gg/rangerswap" class="info-link" target="_blank">
-                                <span class="link-icon">💬</span>
-                                <span class="link-text">Discord</span>
-                                <span class="link-arrow">↗</span>
+                            <a href="https://github.com/GainRangerHeffe/RangerSwap/blob/main/rangerrouter.sol" class="info-link" target="_blank" rel="noopener">
+                                <span class="link-text">RangerSwapRouter</span>
+                                <span class="link-arrow" aria-hidden="true">↗</span>
                             </a>
-                            <a href="https://t.me/rangerswap" class="info-link" target="_blank">
-                                <span class="link-icon">📱</span>
-                                <span class="link-text">Telegram</span>
-                                <span class="link-arrow">↗</span>
+                            <a href="https://github.com/GainRangerHeffe/RangerSwap/blob/main/rangerfeerouter.sol" class="info-link" target="_blank" rel="noopener">
+                                <span class="link-text">RangerSwapFeeRouter</span>
+                                <span class="link-arrow" aria-hidden="true">↗</span>
                             </a>
-                            <a href="https://github.com/rangerswap" class="info-link" target="_blank">
-                                <span class="link-icon">🔧</span>
-                                <span class="link-text">GitHub</span>
-                                <span class="link-arrow">↗</span>
-                            </a>
-                            <a href="https://medium.com/@rangerswap" class="info-link" target="_blank">
-                                <span class="link-icon">📝</span>
-                                <span class="link-text">Medium</span>
-                                <span class="link-arrow">↗</span>
+                            <a href="https://github.com/GainRangerHeffe/RangerSwap/blob/main/limitorder.sol" class="info-link" target="_blank" rel="noopener">
+                                <span class="link-text">RangerSwapLimitOrders</span>
+                                <span class="link-arrow" aria-hidden="true">↗</span>
                             </a>
                         </div>
                     </div>
-
-                    <!-- Analytics Section -->
                     <div class="info-card">
-                        <div class="card-icon">📊</div>
-                        <h3>Analytics</h3>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <span class="stat-value" id="totalVolume">$0</span>
-                                <span class="stat-label">Total Volume</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value" id="totalTVL">$0</span>
-                                <span class="stat-label">Total Value Locked</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value" id="totalPairs">0</span>
-                                <span class="stat-label">Trading Pairs</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value" id="totalFees">$0</span>
-                                <span class="stat-label">Fees Collected</span>
-                            </div>
-                        </div>
+                        <div class="card-icon" aria-hidden="true">🛡️</div>
+                        <h2>Security notes</h2>
+                        <ul class="info-list">
+                            <li>The factory and router follow the Uniswap V2 design.</li>
+                            <li>The limit order contract has an owner who can pause it.</li>
+                            <li>Nothing here has had a third-party audit.</li>
+                            <li>Swaps are sent from your own wallet. Check the token, amount and network in your wallet before you confirm.</li>
+                        </ul>
                         <div class="info-links">
-                            <a href="#" class="info-link" target="_blank">
-                                <span class="link-icon">📈</span>
-                                <span class="link-text">DexScreener</span>
-                                <span class="link-arrow">↗</span>
-                            </a>
-                            <a href="#" class="info-link" target="_blank">
-                                <span class="link-icon">📊</span>
-                                <span class="link-text">DeFiLlama</span>
-                                <span class="link-arrow">↗</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Security Section -->
-                    <div class="info-card">
-                        <div class="card-icon">🛡️</div>
-                        <h3>Security</h3>
-                        <div class="security-items">
-                            <div class="security-item">
-                                <span class="security-icon">✅</span>
-                                <span class="security-text">Based on Uniswap V2 (Battle-tested)</span>
-                            </div>
-                            <div class="security-item">
-                                <span class="security-icon">✅</span>
-                                <span class="security-text">No Admin Keys or Upgradeable Contracts</span>
-                            </div>
-                            <div class="security-item">
-                                <span class="security-icon">✅</span>
-                                <span class="security-text">Fully Decentralized Protocol</span>
-                            </div>
-                            <div class="security-item">
-                                <span class="security-icon">✅</span>
-                                <span class="security-text">Open Source & Verified Contracts</span>
-                            </div>
-                        </div>
-                        <div class="info-links">
-                            <a href="#" class="info-link" target="_blank">
-                                <span class="link-icon">🔍</span>
-                                <span class="link-text">Audit Report</span>
-                                <span class="link-arrow">↗</span>
-                            </a>
-                            <a href="#" class="info-link" target="_blank">
-                                <span class="link-icon">🐛</span>
-                                <span class="link-text">Bug Bounty</span>
-                                <span class="link-arrow">↗</span>
-                            </a>
-                            <a href="#" class="info-link" target="_blank">
-                                <span class="link-icon">🚨</span>
-                                <span class="link-text">Security Guidelines</span>
-                                <span class="link-arrow">↗</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Tokenomics Section -->
-                    <div class="info-card">
-                        <div class="card-icon">💰</div>
-                        <h3>Tokenomics</h3>
-                        <div class="tokenomics-grid">
-                            <div class="tokenomics-item">
-                                <span class="tokenomics-label">Protocol Fee</span>
-                                <span class="tokenomics-value">0.01%</span>
-                            </div>
-                            <div class="tokenomics-item">
-                                <span class="tokenomics-label">LP Fee</span>
-                                <span class="tokenomics-value">0.30%</span>
-                            </div>
-                            <div class="tokenomics-item">
-                                <span class="tokenomics-label">Fee Distribution</span>
-                                <span class="tokenomics-value">Real-time</span>
-                            </div>
-                            <div class="tokenomics-item">
-                                <span class="tokenomics-label">Governance</span>
-                                <span class="tokenomics-value">Community</span>
-                            </div>
-                        </div>
-                        <div class="tokenomics-description">
-                            <p>RangerSwap operates with a minimal 0.01% protocol fee on all trades, ensuring competitive rates while supporting protocol development. The majority of trading fees (0.30%) go directly to liquidity providers.</p>
-                        </div>
-                    </div>
-
-                    <!-- Roadmap Section -->
-                    <div class="info-card">
-                        <div class="card-icon">🛣️</div>
-                        <h3>Roadmap</h3>
-                        <div class="roadmap">
-                            <div class="roadmap-item completed">
-                                <span class="roadmap-status">✅</span>
-                                <div class="roadmap-content">
-                                    <h4>Q1 2024 - Foundation</h4>
-                                    <p>Core DEX deployment on PulseChain and Base</p>
-                                </div>
-                            </div>
-                            <div class="roadmap-item completed">
-                                <span class="roadmap-status">✅</span>
-                                <div class="roadmap-content">
-                                    <h4>Q2 2024 - Multi-Chain</h4>
-                                    <p>Expansion to additional chains and bridge integrations</p>
-                                </div>
-                            </div>
-                            <div class="roadmap-item current">
-                                <span class="roadmap-status">🔄</span>
-                                <div class="roadmap-content">
-                                    <h4>Q3 2024 - Advanced Features</h4>
-                                    <p>Limit orders, yield farming, and analytics dashboard</p>
-                                </div>
-                            </div>
-                            <div class="roadmap-item upcoming">
-                                <span class="roadmap-status">🔮</span>
-                                <div class="roadmap-content">
-                                    <h4>Q4 2024 - Governance</h4>
-                                    <p>DAO launch and community governance implementation</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Team Section -->
-                    <div class="info-card">
-                        <div class="card-icon">👥</div>
-                        <h3>Team</h3>
-                        <div class="team-description">
-                            <p>RangerSwap is built by a team of experienced DeFi developers and security experts committed to creating the most secure and user-friendly multi-chain DEX experience.</p>
-                        </div>
-                        <div class="info-links">
-                            <a href="#" class="info-link" target="_blank">
-                                <span class="link-icon">👨‍💻</span>
-                                <span class="link-text">Meet the Team</span>
-                                <span class="link-arrow">↗</span>
-                            </a>
-                            <a href="#" class="info-link" target="_blank">
-                                <span class="link-icon">💼</span>
-                                <span class="link-text">Join Us</span>
-                                <span class="link-arrow">↗</span>
+                            <a href="https://github.com/GainRangerHeffe/RangerSwap" class="info-link" target="_blank" rel="noopener">
+                                <span class="link-text">Source code on GitHub</span>
+                                <span class="link-arrow" aria-hidden="true">↗</span>
                             </a>
                         </div>
                     </div>
