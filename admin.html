@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Manager - RangerSwap Admin</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><h1>🔄 RangerSwap</h1></a>
+            </div>
+            <nav class="header-nav">
+                <span class="nav-link active">Admin · Token Manager</span>
+            </nav>
+            <div class="header-right">
+                <a href="index.html" class="connect-btn" style="text-decoration:none; display:inline-block;">← Back to App</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="page-container">
+                <div class="page-header">
+                    <h1>Token Manager</h1>
+                    <p>Add tokens, upload icons, and export an updated tokens-data.js -- this page is not linked from the live site and isn't meant for end users.</p>
+                </div>
+
+                <div class="admin-banner">
+                    ⚠️ This tool only edits data in your browser. Nothing is deployed or published automatically -- when you're done, click <strong>Export tokens-data.js</strong> below and replace the file in your project with the download. Always verify a token's contract address on the chain's block explorer before adding it; anyone can deploy a fake token with a real project's name and logo.
+                </div>
+
+                <div class="admin-layout">
+                    <div class="admin-panel">
+                        <h3 id="formTitle">Add Token</h3>
+                        <form id="tokenForm">
+                            <div class="field">
+                                <label for="tokenChain">Chain</label>
+                                <select id="tokenChain"></select>
+                            </div>
+
+                            <div class="field-row">
+                                <div class="field">
+                                    <label for="tokenSymbol">Symbol</label>
+                                    <input type="text" id="tokenSymbol" placeholder="PEPE" required>
+                                </div>
+                                <div class="field">
+                                    <label for="tokenDecimals">Decimals</label>
+                                    <input type="number" id="tokenDecimals" placeholder="18" min="0" max="18" value="18" required>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label for="tokenName">Name</label>
+                                <input type="text" id="tokenName" placeholder="Pepe" required>
+                            </div>
+
+                            <div class="field">
+                                <label for="tokenAddress">Contract Address</label>
+                                <input type="text" id="tokenAddress" placeholder="0x..." required>
+                            </div>
+
+                            <div class="field">
+                                <label for="tokenCoingeckoId">CoinGecko ID (optional, for USD price)</label>
+                                <input type="text" id="tokenCoingeckoId" placeholder="pepe">
+                            </div>
+
+                            <div class="field">
+                                <label>Category</label>
+                                <div class="category-toggle">
+                                    <button type="button" class="active" data-category="top">Top</button>
+                                    <button type="button" data-category="meme">Meme</button>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label for="tokenFallback">Fallback Emoji (shown if the icon fails to load)</label>
+                                <input type="text" id="tokenFallback" placeholder="🐸" maxlength="4">
+                            </div>
+
+                            <div class="field">
+                                <label>Token Icon</label>
+                                <div class="upload-drop" id="uploadDrop">
+                                    <div class="upload-preview" id="uploadPreview">🖼️</div>
+                                    <div class="upload-hint">Click or drag an image here (auto-resized to 128×128 PNG, stored inline -- no separate image file needed)</div>
+                                    <input type="file" id="tokenImage" accept="image/*" style="display:none;">
+                                </div>
+                            </div>
+
+                            <div class="admin-form-actions">
+                                <button type="submit" class="swap-btn" id="saveTokenBtn">Add Token</button>
+                                <button type="button" class="swap-btn btn-secondary" id="cancelEditBtn" style="display:none;">Cancel Edit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="admin-panel">
+                        <div class="admin-toolbar">
+                            <h3 style="margin:0;">Tokens</h3>
+                            <select id="listChainFilter"></select>
+                        </div>
+                        <div class="token-manage-list" id="tokenManageList"></div>
+                    </div>
+                </div>
+
+                <div class="admin-panel" style="margin-top:2rem;">
+                    <h3>Export / Import</h3>
+                    <p style="color:var(--text-secondary); margin-bottom:1rem;">Export writes CHAINS and TOKEN_LISTS (including every edit made in this session) into a fresh <code>tokens-data.js</code> file. Load an existing file first if you want to keep editing a previously exported version instead of what's currently in this project.</p>
+                    <div class="admin-form-actions">
+                        <button type="button" class="swap-btn" id="exportBtn">Export tokens-data.js</button>
+                        <button type="button" class="swap-btn btn-secondary" id="loadFileBtn">Load tokens-data.js</button>
+                        <button type="button" class="swap-btn btn-secondary" id="resetBtn">Reset to Loaded File</button>
+                        <input type="file" id="loadFileInput" accept=".js" style="display:none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="tokens-data.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

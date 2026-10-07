@@ -1765,3 +1765,393 @@ body::before {
 .info-card:nth-child(3n) {
     animation-delay: -4s;
 }
+
+/* Soon badge (tab labels, coming-soon panels) */
+.soon-badge {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 2px 8px;
+    font-size: 0.6rem;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--dark-bg);
+    background: linear-gradient(135deg, var(--neon-orange) 0%, var(--neon-green) 100%);
+    border-radius: 20px;
+    vertical-align: middle;
+}
+
+.tab .soon-badge {
+    margin-left: 4px;
+    font-size: 0.55rem;
+    padding: 1px 6px;
+}
+
+/* Coming soon panel (V3 Pools tab) */
+.coming-soon {
+    text-align: center;
+    padding: 3rem 1.5rem;
+}
+
+.coming-soon-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.coming-soon h3 {
+    font-family: 'Orbitron', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.coming-soon p {
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+}
+
+.coming-soon-features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+    margin: 0 auto 2rem;
+    text-align: left;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(17, 17, 17, 0.8) 100%);
+    border: 1px solid var(--border-glow);
+    color: var(--text-secondary);
+}
+
+.feature-icon {
+    font-size: 1.2rem;
+}
+
+/* Token filter row (in the token select modal) */
+.token-filter-row {
+    display: flex;
+    gap: 8px;
+    padding: 0 1.5rem 1rem;
+}
+
+.token-filter-btn {
+    flex: 1;
+    padding: 8px;
+    background: transparent;
+    border: 1px solid var(--border-glow);
+    color: var(--text-muted);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.token-filter-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--neon-blue);
+}
+
+.token-filter-btn.active {
+    color: var(--text-primary);
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(138, 43, 226, 0.15) 100%);
+    border-color: var(--neon-blue);
+}
+
+/* --- Admin / Token Manager dashboard (admin.html) --- */
+.admin-banner {
+    background: linear-gradient(135deg, rgba(255, 69, 0, 0.12) 0%, rgba(255, 0, 102, 0.12) 100%);
+    border: 1px solid var(--neon-orange);
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.admin-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .admin-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border-glow);
+    padding: 1.5rem;
+}
+
+.admin-panel h3 {
+    font-family: 'Orbitron', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-primary);
+}
+
+.field {
+    margin-bottom: 1rem;
+}
+
+.field label {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.field input[type="text"],
+.field input[type="number"],
+.field select {
+    width: 100%;
+    padding: 12px;
+    background: var(--darker-bg);
+    border: 2px solid var(--border-glow);
+    color: var(--text-primary);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.field input:focus,
+.field select:focus {
+    border-color: var(--neon-blue);
+}
+
+.field-row {
+    display: flex;
+    gap: 12px;
+}
+
+.field-row .field {
+    flex: 1;
+}
+
+.category-toggle {
+    display: flex;
+    gap: 8px;
+}
+
+.category-toggle button {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--border-glow);
+    color: var(--text-muted);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.category-toggle button.active {
+    color: var(--text-primary);
+    border-color: var(--neon-purple);
+    background: rgba(138, 43, 226, 0.15);
+}
+
+.upload-drop {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border: 2px dashed var(--border-glow);
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.upload-drop:hover,
+.upload-drop.drag-over {
+    border-color: var(--neon-blue);
+}
+
+.upload-preview {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--darker-bg);
+    border: 2px solid var(--border-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.upload-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-hint {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.admin-form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 1.5rem;
+}
+
+.admin-form-actions .swap-btn {
+    margin: 0;
+}
+
+.btn-secondary {
+    background: transparent !important;
+    border: 2px solid var(--border-glow) !important;
+    color: var(--text-secondary) !important;
+}
+
+.btn-secondary:hover {
+    border-color: var(--neon-blue) !important;
+    color: var(--text-primary) !important;
+}
+
+.admin-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.admin-toolbar select {
+    padding: 10px 14px;
+    background: var(--darker-bg);
+    border: 2px solid var(--border-glow);
+    color: var(--text-primary);
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.token-manage-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 640px;
+    overflow-y: auto;
+}
+
+.token-manage-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(17, 17, 17, 0.8) 100%);
+    border: 1px solid var(--border-glow);
+}
+
+.token-manage-thumb {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--darker-bg);
+    border: 2px solid var(--border-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.token-manage-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.token-manage-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.token-manage-info h4 {
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.token-manage-info p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.token-manage-badge {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border: 1px solid var(--border-glow);
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.token-manage-badge.meme {
+    border-color: var(--neon-orange);
+    color: var(--neon-orange);
+}
+
+.token-manage-badge.top {
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+}
+
+.token-manage-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.icon-btn {
+    background: transparent;
+    border: 1px solid var(--border-glow);
+    color: var(--text-secondary);
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+    border-color: var(--neon-blue);
+    color: var(--text-primary);
+}
+
+.icon-btn.danger:hover {
+    border-color: var(--neon-red);
+    color: var(--neon-red);
+}
+
+.admin-empty {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+}

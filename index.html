@@ -22,6 +22,7 @@
                         <option value="369">PulseChain</option>
                         <option value="8453">Base</option>
                         <option value="998899">HyperEVM</option>
+                        <option value="4663">Robinhood Chain</option>
                     </select>
                 </div>
                 <button id="connectWallet" class="connect-btn">Connect Wallet</button>
@@ -38,6 +39,7 @@
                         <button class="tab" data-tab="liquidity">Liquidity</button>
                         <button class="tab" data-tab="pools">Pools</button>
                         <button class="tab" data-tab="limit">Limit Orders</button>
+                        <button class="tab" data-tab="v3pools">V3 Pools <span class="soon-badge">Soon</span></button>
                     </div>
                 </div>
 
@@ -257,6 +259,30 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- V3 Pools Tab (Coming Soon) -->
+                <div id="v3pools" class="tab-content">
+                    <div class="coming-soon">
+                        <div class="coming-soon-icon">🚧</div>
+                        <h3>Concentrated Liquidity V3 Pools</h3>
+                        <p>Coming soon for Robinhood Chain. Provide liquidity within custom price ranges, earn higher capital-efficient fees, and manage positions with NFT-based LP tokens -- the same model as Uniswap V3.</p>
+                        <div class="coming-soon-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">🎯</span>
+                                <span>Custom price ranges for concentrated liquidity</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">💧</span>
+                                <span>Multiple fee tiers per pair</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🖼️</span>
+                                <span>NFT-based liquidity positions</span>
+                            </div>
+                        </div>
+                        <span class="soon-badge">Coming Soon</span>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -271,11 +297,17 @@
             <div class="token-search">
                 <input type="text" id="tokenSearch" placeholder="Search token name or address">
             </div>
+            <div class="token-filter-row">
+                <button class="token-filter-btn active" data-category="all">All</button>
+                <button class="token-filter-btn" data-category="top">Top</button>
+                <button class="token-filter-btn" data-category="meme">Meme</button>
+            </div>
             <div class="token-list" id="tokenList"></div>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <script src="tokens-data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

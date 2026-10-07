@@ -22,6 +22,7 @@
                         <option value="369">PulseChain</option>
                         <option value="8453">Base</option>
                         <option value="998899">HyperEVM</option>
+                        <option value="4663">Robinhood Chain</option>
                     </select>
                 </div>
                 <button id="connectWallet" class="connect-btn">Connect Wallet</button>
@@ -124,6 +125,32 @@
                                         <span class="contract-address" id="limitBase">0x...</span>
                                     </div>
                                     <button class="copy-btn" onclick="copyToClipboard('limitBase')">📋</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contract-section">
+                            <h4>Robinhood Chain</h4>
+                            <div class="contract-list">
+                                <div class="contract-item">
+                                    <div class="contract-info">
+                                        <span class="contract-name">Factory</span>
+                                        <span class="contract-address" id="factoryRobinhood">0x...</span>
+                                    </div>
+                                    <button class="copy-btn" onclick="copyToClipboard('factoryRobinhood')">📋</button>
+                                </div>
+                                <div class="contract-item">
+                                    <div class="contract-info">
+                                        <span class="contract-name">Router</span>
+                                        <span class="contract-address" id="routerRobinhood">0x...</span>
+                                    </div>
+                                    <button class="copy-btn" onclick="copyToClipboard('routerRobinhood')">📋</button>
+                                </div>
+                                <div class="contract-item">
+                                    <div class="contract-info">
+                                        <span class="contract-name">Limit Orders</span>
+                                        <span class="contract-address" id="limitRobinhood">0x...</span>
+                                    </div>
+                                    <button class="copy-btn" onclick="copyToClipboard('limitRobinhood')">📋</button>
                                 </div>
                             </div>
                         </div>
@@ -328,6 +355,7 @@
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <script src="tokens-data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
